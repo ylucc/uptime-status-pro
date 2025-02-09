@@ -4,6 +4,7 @@ import { GetMonitors } from '../common/uptimerobot';
 import { formatDuration, formatNumber } from '../common/helper';
 import Link from './link';
 import { MonitorContext } from './app';
+import { getSSLInfo } from '../common/sslHelper'; // 导入 sslHelper
 
 function UptimeRobot({ apikey }) {
   const status = {
@@ -14,12 +15,13 @@ function UptimeRobot({ apikey }) {
 
   const { CountDays, ShowLink } = window.Config;
 
-  const [monitors, setMonitors] = useState();
+  const [monitors, setMonitors] = useState([]);
+  const [sslExpiry, setSSLExpiry] = useState({});
 
   const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites } = useContext(MonitorContext);
 
   useEffect(() => {
-    GetMonitors(apikey, CountDays).then((data) => {
+    GetMonitors(apikey, CountDays).then(async (data) => {
       setMonitors(data);
 
       let up = data.filter((monitor) => monitor.status === 'ok').length;
@@ -28,14 +30,28 @@ function UptimeRobot({ apikey }) {
       setTotalSites(prevTotal => prevTotal + data.length);
       setUpSites(prevUp => prevUp + up);
       setDownSites(prevDown => prevDown + down);
+
+      const sslExpiryData = {};
+      for (let monitor of data) {
+        if (monitor.url) {
+          const sslInfo = await getSSLInfo(monitor.url);
+          sslExpiryData[monitor.id] = sslInfo;
+        }
+      }
+      setSSLExpiry(sslExpiryData);
     });
   }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
 
-  if (monitors) return monitors.map((site) => (
+  const handleExpiryClick = (id) => {
+    alert(`SSL证书将于 ${sslExpiry[id].valid_to} 过期`);
+  };
+
+  if (monitors.length) return monitors.map((site) => (
     <div key={site.id} className='site'>
       <div className='meta'>
         <span className='name' dangerouslySetInnerHTML={{ __html: site.name }} />
         {ShowLink && <Link className='link' to={site.url} text={site.name} />}
+        <span className='ssl-expiry' onClick={() => handleExpiryClick(site.id)}>证书还有 {sslExpiry[site.id] && sslExpiry[site.id].remaining_days} 天过期</span>
         <div className='status-container'>
           <span className={'status-indicator ' + site.status}></span>
           <span className={'status ' + site.status}>{status[site.status]}</span>
