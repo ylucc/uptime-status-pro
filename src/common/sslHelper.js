@@ -13,7 +13,7 @@ const extractDomain = (url) => {
 export const getSSLInfo = async (url) => {
   try {
     const domain = extractDomain(url);
-    const response = await axios.get(`https://api.jmjm.tk/api/sslinfo/?url=${encodeURIComponent(domain)}`);
+    const response = await axios.get(`http://api.jmjm.tk/api/sslinfo/?url=${encodeURIComponent(domain)}`);
     console.log("API响应数据:", response.data); // 调试输出
     const data = response.data.data;
 
