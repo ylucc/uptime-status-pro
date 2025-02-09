@@ -43,7 +43,7 @@ function UptimeRobot({ apikey }) {
   }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
 
   const handleExpiryClick = (id) => {
-    if (sslExpiry[id].error) {
+    if (sslExpiry[id] && sslExpiry[id].error) {
       alert(sslExpiry[id].error);
     } else {
       alert(`SSL证书将于 ${sslExpiry[id].valid_to} 过期`);
@@ -56,10 +56,10 @@ function UptimeRobot({ apikey }) {
         <span className='name' dangerouslySetInnerHTML={{ __html: site.name }} />
         {ShowLink && <Link className='link' to={site.url} text={site.name} />}
         <span className='ssl-expiry' onClick={() => handleExpiryClick(site.id)}>
-          证书还有 {sslExpiry[site.id] && sslExpiry[site.id].remaining_days !== undefined 
-            ? `${sslExpiry[site.id].remaining_days} 天过期` 
-            : sslExpiry[site.id] && sslExpiry[site.id].error
-            ? sslExpiry[site.id].error
+          证书还有 {sslExpiry[site.id] 
+            ? sslExpiry[site.id].remaining_days !== undefined 
+              ? `${sslExpiry[site.id].remaining_days} 天过期` 
+              : sslExpiry[site.id].error 
             : '无证书'}
         </span>
         <div className='status-container'>
