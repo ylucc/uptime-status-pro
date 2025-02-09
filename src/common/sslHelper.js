@@ -1,21 +1,20 @@
-// sslHelper.js
 import axios from 'axios';
-import moment from 'moment';
 
 // 获取SSL证书信息函数
-export const getSSLCertificateExpiry = async (url) => {
+export const getSSLInfo = async (domain) => {
   try {
-    const response = await axios.get(`https://api.example.com/ssl-check?url=${encodeURIComponent(url)}`);
-    return response.data.expiryDate; // 假设API返回的过期时间字段是expiryDate
-  } catch (error) {
-    console.error('Error fetching SSL certificate expiry:', error);
-    return '获取失败';
-  }
-};
+    const response = await axios.get(`http://api.jmjm.tk/api/sslinfo/?url=${encodeURIComponent(domain)}`);
+    const data = response.data.data;
 
-// 计算距离证书过期的天数函数
-export const calculateDaysUntilExpiry = (expiryDate) => {
-  const now = moment();
-  const expiry = moment(expiryDate);
-  return expiry.diff(now, 'days');
+    return {
+      domain: data.domain,
+      valid_from: data.valid_from,
+      valid_to: data.valid_to,
+      remaining_days: data.remaining_days,
+      is_expired: data.is_expired
+    };
+  } catch (error) {
+    console.error('Error fetching SSL certificate information:', error);
+    return { error: 'Unable to retrieve certificate information' };
+  }
 };
