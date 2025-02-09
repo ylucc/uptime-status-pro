@@ -2,8 +2,10 @@ import axios from 'axios';
 
 // 提取域名的函数
 const extractDomain = (url) => {
+  console.log("原始URL:", url); // 调试输出
   let domain = url.replace(/^https?:\/\//, ''); // 去除 http:// 或 https:// 前缀
   domain = domain.split('/')[0]; // 去除路径部分，只保留域名
+  console.log("提取的域名:", domain); // 调试输出
   return domain;
 }
 
@@ -11,7 +13,8 @@ const extractDomain = (url) => {
 export const getSSLInfo = async (url) => {
   try {
     const domain = extractDomain(url);
-    const response = await axios.get(`http://api.jmjm.tk/api/sslinfo/?url=${encodeURIComponent(domain)}`);
+    const response = await axios.get(`https://api.jmjm.tk/api/sslinfo/?url=${encodeURIComponent(domain)}`);
+    console.log("API响应数据:", response.data); // 调试输出
     const data = response.data.data;
 
     if (data) {
