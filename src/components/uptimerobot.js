@@ -90,7 +90,7 @@ function UptimeRobot({ apikey }) {
               {ssl.remaining_days !== undefined ? (
                 <span
                   className='ssl-info'
-                  data-tip={`证书到期时间: ${ssl.valid_to}`}
+                  data-tip={`到期时间: ${ssl.valid_to}`}
                   data-for={`tooltip-${site.id}`}
                   id={`ssl-info-${site.id}`}
                   onMouseOver={() => ReactTooltip.show(document.getElementById(`ssl-info-${site.id}`))}
