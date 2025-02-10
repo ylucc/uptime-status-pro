@@ -8,7 +8,6 @@
     />
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>Uptime Status</title>
-    <script src="./config.js"></script>
     <style>
       .login {
         display: flex;
@@ -62,7 +61,7 @@
 
       function loadApp() {
         const script = document.createElement('script');
-        script.src = './main.js';
+        script.src = './src/index.js'; // 确保加载 React 应用的主脚本
         document.body.appendChild(script);
       }
     </script>
@@ -76,6 +75,5 @@
       </form>
     </div>
     <div id="app"></div>
-    <script src="./config.js"></script>
   </body>
 </html>
