@@ -1,13 +1,12 @@
 const express = require('express');
-const sslChecker = require('./sslChecker'); // 正确导入 sslChecker 函数
+const sslChecker = require('./sslChecker');
 const dns = require('node:dns');
 const app = express();
 
-// 允许请求主体包含 JSON 数据
 app.use(express.json());
 
 app.post('/ssl-info', async (req, res) => {
-    const domains = req.body.domains; // 从请求主体中获取域名列表
+    const domains = req.body.domains;
     if (!domains || !Array.isArray(domains)) {
         return res.status(400).json({ error: 'Domains parameter is required and must be an array' });
     }
