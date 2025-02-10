@@ -86,7 +86,7 @@ function UptimeRobot({ apikey }) {
           {ShowLink && (
             <>
               <Link className='link' to={site.url} text={site.name} />
-              &nbsp;
+              &nbsp;&nbsp;
               {ssl.remaining_days !== undefined ? (
                 <span
                   className='ssl-info'
