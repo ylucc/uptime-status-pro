@@ -72,6 +72,8 @@ function UptimeRobot({ apikey }) {
     const domain = url.hostname;
     const ssl = sslInfo[domain] || {};
 
+    console.log(`SSL info for ${domain}:`, ssl);
+
     return (
       <div key={site.id} className='site'>
         <div className='meta'>
