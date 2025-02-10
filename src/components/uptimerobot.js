@@ -30,15 +30,15 @@ function UptimeRobot({ apikey }) {
       setUpSites(prevUp => prevUp + up);
       setDownSites(prevDown => prevDown + down);
 
+      const today = new Date().toISOString().split('T')[0]; // 获取当天日期字符串
+
       data.forEach((site) => {
         const url = new URL(site.url);
         const domain = url.hostname;
 
         const cachedSslInfo = JSON.parse(localStorage.getItem(domain));
-        const oneDay = 24 * 60 * 60 * 1000; // 一天的毫秒数
-        const now = new Date();
-
-        if (cachedSslInfo && (now - new Date(cachedSslInfo.cachedAt) < oneDay)) {
+        
+        if (cachedSslInfo && cachedSslInfo.cachedDate === today) {
           setSslInfo(prevState => ({
             ...prevState,
             [domain]: cachedSslInfo.data
@@ -49,7 +49,7 @@ function UptimeRobot({ apikey }) {
             .then(info => {
               if (info.code === 200) {
                 const sslData = info.data;
-                localStorage.setItem(domain, JSON.stringify({ data: sslData, cachedAt: now.toISOString() }));
+                localStorage.setItem(domain, JSON.stringify({ data: sslData, cachedDate: today }));
                 setSslInfo(prevState => ({
                   ...prevState,
                   [domain]: sslData
