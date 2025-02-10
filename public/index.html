@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>Uptime Status</title>
     <style>
@@ -61,7 +58,7 @@
 
       function loadApp() {
         const script = document.createElement('script');
-        script.src = './src/index.js'; // 确保加载 React 应用的主脚本
+        script.src = './main.js'; // 确保加载 React 应用的主脚本
         document.body.appendChild(script);
       }
     </script>
@@ -75,5 +72,6 @@
       </form>
     </div>
     <div id="app"></div>
+    <script src="./config.js"></script>
   </body>
 </html>
