@@ -17,7 +17,7 @@ function UptimeRobot({ apikey }) {
   const [monitors, setMonitors] = useState();
   const [sslInfo, setSslInfo] = useState({});
 
-  const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites } = useContext(MonitorContext);
+  const { totalSites, setTotalSites, upSites, setUpSites, downSites } = useContext(MonitorContext);
 
   useEffect(() => {
     GetMonitors(apikey, CountDays).then((data) => {
@@ -30,7 +30,11 @@ function UptimeRobot({ apikey }) {
       setUpSites(prevUp => prevUp + up);
       setDownSites(prevDown => prevDown + down);
 
-      const domains = data.map((site) => site.url.replace(/^https?:\/\//, ''));
+      const domains = data.map((site) => {
+        const url = new URL(site.url);
+        return url.hostname;  // 仅提取域名部分
+      });
+
       fetch('/ssl-info', {
         method: 'POST',
         headers: {
@@ -49,7 +53,8 @@ function UptimeRobot({ apikey }) {
   }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
 
   if (monitors) return monitors.map((site) => {
-    const domain = site.url.replace(/^https?:\/\//, '');
+    const url = new URL(site.url);
+    const domain = url.hostname;
     const ssl = sslInfo[domain] || {};
 
     return (
