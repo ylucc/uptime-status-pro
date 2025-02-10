@@ -35,6 +35,8 @@ function UptimeRobot({ apikey }) {
         return url.hostname;  // 仅提取域名部分
       });
 
+      console.log('Domains to check:', domains);
+
       fetch('/ssl-info', {
         method: 'POST',
         headers: {
@@ -43,6 +45,7 @@ function UptimeRobot({ apikey }) {
         body: JSON.stringify({ domains })
       }).then(response => response.json())
         .then(info => {
+          console.log('SSL info received:', info);
           const sslData = {};
           info.forEach(item => {
             sslData[item.domain] = item;
