@@ -5,7 +5,7 @@ import { formatDuration, formatNumber } from '../common/helper';
 import Link from './link';
 import { MonitorContext } from './app';
 
-function UptimeRobot({ apikey }) {
+function UptimeRobot({ apikey, loggedIn }) { // 传入 loggedIn 状态
   const status = {
     ok: '正常运行',
     down: '无法访问',
@@ -20,6 +20,8 @@ function UptimeRobot({ apikey }) {
   const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites } = useContext(MonitorContext);
 
   useEffect(() => {
+    if (!loggedIn) return; // 如果未登录，则不加载数据
+
     GetMonitors(apikey, CountDays).then((data) => {
       setMonitors(data);
 
@@ -64,7 +66,7 @@ function UptimeRobot({ apikey }) {
     }).catch(error => {
       console.error('获取监控信息时出错:', error);
     });
-  }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
+  }, [loggedIn, apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
 
   if (monitors.length === 0) {
     return (
