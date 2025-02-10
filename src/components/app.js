@@ -21,11 +21,8 @@ function App() {
   }, []);
 
   const handleLogin = () => {
-    console.log("登录成功"); // 调试信息
     setLoggedIn(true); // 设置登录状态
   };
-
-  console.log("当前登录状态:", loggedIn); // 调试信息
 
   return (
     <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites }}>
@@ -34,7 +31,7 @@ function App() {
         {loggedIn ? ( // 根据登录状态显示内容
           <div id='uptime'>
             {apikeys.map((key) => (
-              <UptimeRobot key={key} apikey={key} loggedIn={loggedIn} /> // 传递 loggedIn 状态
+              <UptimeRobot key={key} apikey={key} />
             ))}
           </div>
         ) : (
