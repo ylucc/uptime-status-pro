@@ -1,12 +1,16 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const sslChecker = require('./sslChecker');
 const dns = require('node:dns');
 const app = express();
 
 app.use(express.json());
 
-const logFile = fs.createWriteStream('server.log', { flags: 'a' });
+// 确定日志文件路径为项目根目录
+const logFilePath = path.join(__dirname, 'server.log');
+const logFile = fs.createWriteStream(logFilePath, { flags: 'a' });
+
 const log = (message) => {
     const timestamp = new Date().toISOString();
     logFile.write(`[${timestamp}] ${message}\n`);
