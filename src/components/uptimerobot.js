@@ -59,10 +59,12 @@ function UptimeRobot({ apikey }) {
           {ShowLink && (
             <>
               <Link className='link' to={site.url} text={site.name} />
-              {ssl.daysRemaining != null && (
-                <span className='ssl-info' data-tip={`到期时间: ${ssl.validTo}`}>
+              {ssl.daysRemaining != null ? (
+                <span className='ssl-info' data-tip={`到期时间: ${ssl.validTo}`} onClick={() => alert(`到期时间: ${ssl.validTo}`)}>
                   (剩余天数: {ssl.daysRemaining})
                 </span>
+              ) : (
+                <span className='ssl-info'>(无证书)</span>
               )}
             </>
           )}
