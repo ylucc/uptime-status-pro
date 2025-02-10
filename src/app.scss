@@ -266,15 +266,14 @@ a {
 }
 
 .tooltip {
-  padding: 6px 6px !important;
+  padding: 6px !important;
   border-radius: 5px !important;
   background-color: rgba(0, 0, 0, 0.75) !important;
   color: #ffffff !important;
 }
 
 .tooltip-inner {
-  padding-left: 4px !important;
-  padding-right: 4px !important;
+  padding: 2px 4px !important;
 }
 
 @keyframes ripple {
