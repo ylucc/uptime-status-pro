@@ -119,8 +119,7 @@ function UptimeRobot({ apikey }) {
               ? `最近 ${CountDays} 天故障 ${site.total.times} 次，累计 ${formatDuration(site.total.duration)}，平均可用率 ${site.average}%`
               : `最近 ${CountDays} 天可用率 ${site.average}%`}
           </span>
-
-<span>{site.daily[site.daily.length - 1].date.format('YYYY-MM-DD')}</span>
+          <span>{site.daily[site.daily.length - 1].date.format('YYYY-MM-DD')}</span>
         </div>
         <ReactTooltip className='tooltip' place='top' type='dark' effect='solid' />
       </div>
