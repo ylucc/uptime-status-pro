@@ -11,6 +11,7 @@ const CACHE_FILE = path.join(__dirname, 'sslCache.json');
 
 // 读取缓存文件
 const readCache = () => {
+    console.log('Reading cache file...');  // 调试输出
     if (fs.existsSync(CACHE_FILE)) {
         const rawData = fs.readFileSync(CACHE_FILE);
         return JSON.parse(rawData);
@@ -20,6 +21,7 @@ const readCache = () => {
 
 // 保存缓存文件
 const saveCache = (data) => {
+    console.log('Saving cache file...');  // 调试输出
     fs.writeFileSync(CACHE_FILE, JSON.stringify(data, null, 2));
 };
 
@@ -68,6 +70,7 @@ const sslChecker = (host) => {
 };
 
 app.post('/ssl-info', async (req, res) => {
+    console.log('Received request:', req.body);  // 调试输出
     const domains = req.body.domains;
     if (!domains || !Array.isArray(domains)) {
         return res.status(400).json({ error: 'Domains parameter is required and must be an array' });
@@ -79,8 +82,10 @@ app.post('/ssl-info', async (req, res) => {
 
     for (const domain of domains) {
         if (cache[domain] && cache[domain].cachedDate === today) {
+            console.log(`Cache hit for domain: ${domain}`);  // 调试输出
             results.push(cache[domain].data);
         } else {
+            console.log(`Cache miss for domain: ${domain}`);  // 调试输出
             try {
                 await dns.promises.resolve(domain);
                 const ssl = await sslChecker(domain);
