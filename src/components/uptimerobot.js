@@ -34,22 +34,35 @@ function UptimeRobot({ apikey }) {
         const url = new URL(site.url);
         const domain = url.hostname;
 
-        fetch(`https://api.jmjm.tk/api/sslinfo/?url=${domain}`)
-          .then(response => response.json())
-          .then(info => {
-            if (info.code === 200) {
-              setSslInfo(prevState => ({
-                ...prevState,
-                [domain]: info.data
-              }));
-            }
-          })
-          .catch(error => {
-            console.error(`Error fetching SSL info for ${domain}:`, error);
-          });
+        const cachedSslInfo = JSON.parse(localStorage.getItem(domain));
+        const oneDay = 24 * 60 * 60 * 1000; // 一天的毫秒数
+        const now = new Date();
+
+        if (cachedSslInfo && (now - new Date(cachedSslInfo.cachedAt) < oneDay)) {
+          setSslInfo(prevState => ({
+            ...prevState,
+            [domain]: cachedSslInfo.data
+          }));
+        } else {
+          fetch(`https://api.jmjm.tk/api/sslinfo/?url=${domain}`)
+            .then(response => response.json())
+            .then(info => {
+              if (info.code === 200) {
+                const sslData = info.data;
+                localStorage.setItem(domain, JSON.stringify({ data: sslData, cachedAt: now.toISOString() }));
+                setSslInfo(prevState => ({
+                  ...prevState,
+                  [domain]: sslData
+                }));
+              }
+            })
+            .catch(error => {
+              console.error(`获取 ${domain} 的 SSL 信息时出错:`, error);
+            });
+        }
       });
     }).catch(error => {
-      console.error('Error fetching monitors:', error);
+      console.error('获取监控信息时出错:', error);
     });
   }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
 
@@ -73,11 +86,11 @@ function UptimeRobot({ apikey }) {
           {ShowLink && (
             <>
               <Link className='link' to={site.url} text={site.name} />
-              &nbsp; {/* 添加空格 */}
+              &nbsp;
               {ssl.remaining_days !== undefined ? (
                 <span
                   className='ssl-info'
-                  data-tip={`到期时间: ${ssl.valid_to}`}
+                  data-tip={`证书到期时间: ${ssl.valid_to}`}
                   data-for={`tooltip-${site.id}`}
                   id={`ssl-info-${site.id}`}
                   onMouseOver={() => ReactTooltip.show(document.getElementById(`ssl-info-${site.id}`))}
@@ -86,7 +99,7 @@ function UptimeRobot({ apikey }) {
                   (证书剩余: {ssl.remaining_days}天)
                 </span>
               ) : (
-                <span className='ssl-info'>(无证书)</span>
+                <span className='ssl-info'>(暂无证书)</span>
               )}
               <ReactTooltip id={`tooltip-${site.id}`} place='top' type='dark' effect='solid' />
             </>
