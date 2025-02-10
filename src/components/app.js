@@ -3,7 +3,6 @@ import Link from './link';
 import Header from './header';
 import UptimeRobot from './uptimerobot';
 import Package from '../../package.json';
-import Login from './Login'; // 引入 Login 组件
 
 export const MonitorContext = createContext();
 
@@ -11,7 +10,6 @@ function App() {
   const [totalSites, setTotalSites] = useState(0);
   const [upSites, setUpSites] = useState(0);
   const [downSites, setDownSites] = useState(0);
-  const [loggedIn, setLoggedIn] = useState(false); // 登录状态
 
   const apikeys = useMemo(() => {
     const { ApiKeys } = window.Config;
@@ -20,23 +18,15 @@ function App() {
     return [];
   }, []);
 
-  const handleLogin = () => {
-    setLoggedIn(true); // 设置登录状态
-  };
-
   return (
     <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites }}>
       <Header />
       <div className='container'>
-        {loggedIn ? ( // 根据登录状态显示内容
-          <div id='uptime'>
-            {apikeys.map((key) => (
-              <UptimeRobot key={key} apikey={key} />
-            ))}
-          </div>
-        ) : (
-          <Login onLogin={handleLogin} /> // 显示登录组件
-        )}
+        <div id='uptime'>
+          {apikeys.map((key) => (
+            <UptimeRobot key={key} apikey={key} />
+          ))}
+        </div>
         <div id="footer">
           <div className='container'>
             <div className='left'>
