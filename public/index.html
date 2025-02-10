@@ -28,9 +28,6 @@
         font-size: 16px;
         cursor: pointer;
       }
-      #app {
-        display: none;
-      }
     </style>
     <script>
       async function hashPassword(password) {
@@ -49,7 +46,6 @@
 
         if (hashedPassword === correctHashedPassword) {
           document.getElementById('login').style.display = 'none';
-          document.getElementById('app').style.display = 'block';
           loadApp(); // 加载应用
         } else {
           alert('密码错误');
@@ -71,7 +67,5 @@
         <button type="submit">登录</button>
       </form>
     </div>
-    <div id="app"></div>
-    <script src="./config.js"></script>
   </body>
 </html>
