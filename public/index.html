@@ -54,9 +54,16 @@
         if (hashedPassword === correctHashedPassword) {
           document.getElementById('login').style.display = 'none';
           document.getElementById('app').style.display = 'block';
+          loadApp(); // 加载应用
         } else {
           alert('密码错误');
         }
+      }
+
+      function loadApp() {
+        const script = document.createElement('script');
+        script.src = './main.js';
+        document.body.appendChild(script);
       }
     </script>
   </head>
@@ -70,6 +77,5 @@
     </div>
     <div id="app"></div>
     <script src="./config.js"></script>
-    <script src="./main.js"></script> <!-- 确保 React 应用在输入密码后加载 -->
   </body>
 </html>
