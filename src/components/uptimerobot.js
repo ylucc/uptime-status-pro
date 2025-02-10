@@ -75,7 +75,14 @@ function UptimeRobot({ apikey }) {
               <Link className='link' to={site.url} text={site.name} />
               &nbsp; {/* 添加空格 */}
               {ssl.remaining_days !== undefined ? (
-                <span className='ssl-info' data-tip={`到期时间: ${ssl.valid_to}`} data-for={`tooltip-${site.id}`} onClick={() => ReactTooltip.show(document.getElementById(`tooltip-${site.id}`))}>
+                <span
+                  className='ssl-info'
+                  data-tip={`到期时间: ${ssl.valid_to}`}
+                  data-for={`tooltip-${site.id}`}
+                  id={`ssl-info-${site.id}`}
+                  onMouseOver={() => ReactTooltip.show(document.getElementById(`ssl-info-${site.id}`))}
+                  onMouseOut={() => ReactTooltip.hide(document.getElementById(`ssl-info-${site.id}`))}
+                >
                   (证书剩余: {ssl.remaining_days}天)
                 </span>
               ) : (
