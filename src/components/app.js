@@ -34,7 +34,7 @@ function App() {
         {loggedIn ? ( // 根据登录状态显示内容
           <div id='uptime'>
             {apikeys.map((key) => (
-              <UptimeRobot key={key} apikey={key} />
+              <UptimeRobot key={key} apikey={key} loggedIn={loggedIn} /> // 传递 loggedIn 状态
             ))}
           </div>
         ) : (
