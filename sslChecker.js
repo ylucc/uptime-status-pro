@@ -51,6 +51,8 @@ const sslChecker = (host, options = {}) =>
                     } = res.socket.getPeerCertificate();
                     res.socket.destroy();
 
+                    console.log(`Certificate for ${host}: valid_from=${valid_from}, valid_to=${valid_to}`);
+
                     if (!valid_from || !valid_to) {
                         reject(new Error('No certificate: Missing required certificate fields'));
                         return;
