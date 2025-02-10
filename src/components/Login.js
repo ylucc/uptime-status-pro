@@ -7,6 +7,7 @@ function Login({ onLogin }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password === correctPassword) {
+      console.log("密码正确"); // 调试信息
       onLogin();
     } else {
       alert('密码错误');
