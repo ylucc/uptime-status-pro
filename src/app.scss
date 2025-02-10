@@ -205,6 +205,10 @@ a {
       line-height: 12px;
       color: #333333;
     }
+.ssl-info {
+  font-weight: bold;
+  font-size: 14px;
+}
     .tooltip {
       padding: 6px 9px !important;
       border-radius: 5px !important;
@@ -258,22 +262,6 @@ a {
   .right {
     text-align: right;
   }
-}
-
-.ssl-info {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.tooltip {
-  padding: 6px !important;
-  border-radius: 5px !important;
-  background-color: rgba(0, 0, 0, 0.75) !important;
-  color: #ffffff !important;
-}
-
-.tooltip-inner {
-  padding: 2px 4px !important;
 }
 
 @keyframes ripple {
