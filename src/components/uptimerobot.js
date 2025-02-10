@@ -30,30 +30,24 @@ function UptimeRobot({ apikey }) {
       setUpSites(prevUp => prevUp + up);
       setDownSites(prevDown => prevDown + down);
 
-      const domains = data.map((site) => {
+      data.forEach((site) => {
         const url = new URL(site.url);
-        return url.hostname;  // 仅提取域名部分
-      });
+        const domain = url.hostname;
 
-      console.log('Domains to check:', domains);
-
-      fetch('/ssl-info', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ domains })
-      }).then(response => response.json())
-        .then(info => {
-          console.log('SSL info received:', info);
-          const sslData = {};
-          info.forEach(item => {
-            sslData[item.domain] = item;
+        fetch(`https://api.jmjm.tk/api/sslinfo/?url=${domain}`)
+          .then(response => response.json())
+          .then(info => {
+            if (info.code === 200) {
+              setSslInfo(prevState => ({
+                ...prevState,
+                [domain]: info.data
+              }));
+            }
+          })
+          .catch(error => {
+            console.error(`Error fetching SSL info for ${domain}:`, error);
           });
-          setSslInfo(sslData);
-        }).catch(error => {
-          console.error('Error fetching SSL info:', error);
-        });
+      });
     }).catch(error => {
       console.error('Error fetching monitors:', error);
     });
@@ -72,8 +66,6 @@ function UptimeRobot({ apikey }) {
     const domain = url.hostname;
     const ssl = sslInfo[domain] || {};
 
-    console.log(`SSL info for ${domain}:`, ssl);
-
     return (
       <div key={site.id} className='site'>
         <div className='meta'>
@@ -81,9 +73,9 @@ function UptimeRobot({ apikey }) {
           {ShowLink && (
             <>
               <Link className='link' to={site.url} text={site.name} />
-              {ssl.daysRemaining !== undefined ? (
-                <span className='ssl-info' data-tip={`到期时间: ${ssl.validTo}`} onClick={() => alert(`到期时间: ${ssl.validTo}`)}>
-                  (剩余天数: {ssl.daysRemaining})
+              {ssl.remaining_days !== undefined ? (
+                <span className='ssl-info' data-tip={`到期时间: ${ssl.valid_to}`} onClick={() => alert(`到期时间: ${ssl.valid_to}`)}>
+                  (剩余天数: {ssl.remaining_days})
                 </span>
               ) : (
                 <span className='ssl-info'>(无证书)</span>
