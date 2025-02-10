@@ -28,7 +28,7 @@ function UptimeRobot({ apikey }) {
 
       setTotalSites(prevTotal => prevTotal + data.length);
       setUpSites(prevUp => prevUp + up);
-      setDownSites(prevDown = prevDown + down);
+      setDownSites(prevDown => prevDown + down);
 
       const today = new Date().toISOString().split('T')[0]; // 获取当天日期字符串
 
