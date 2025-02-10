@@ -5,7 +5,7 @@ import { formatDuration, formatNumber } from '../common/helper';
 import Link from './link';
 import { MonitorContext } from './app';
 
-function UptimeRobot({ apikey, loggedIn }) { // 传入 loggedIn 状态
+function UptimeRobot({ apikey }) {
   const status = {
     ok: '正常运行',
     down: '无法访问',
@@ -20,8 +20,6 @@ function UptimeRobot({ apikey, loggedIn }) { // 传入 loggedIn 状态
   const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites } = useContext(MonitorContext);
 
   useEffect(() => {
-    if (!loggedIn) return; // 如果未登录，则不加载数据
-
     GetMonitors(apikey, CountDays).then((data) => {
       setMonitors(data);
 
@@ -30,7 +28,7 @@ function UptimeRobot({ apikey, loggedIn }) { // 传入 loggedIn 状态
 
       setTotalSites(prevTotal => prevTotal + data.length);
       setUpSites(prevUp => prevUp + up);
-      setDownSites(prevDown => prevDown + down);
+      setDownSites(prevDown = prevDown + down);
 
       const today = new Date().toISOString().split('T')[0]; // 获取当天日期字符串
 
@@ -66,7 +64,7 @@ function UptimeRobot({ apikey, loggedIn }) { // 传入 loggedIn 状态
     }).catch(error => {
       console.error('获取监控信息时出错:', error);
     });
-  }, [loggedIn, apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
+  }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites]);
 
   if (monitors.length === 0) {
     return (
