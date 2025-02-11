@@ -24,7 +24,7 @@ function Header() {
         </div>
       </div>
       <div className='stats' style={{ textAlign: 'center', marginTop: '20px' }}>
-        <div style={{ color: '#4a86e8' }}>网站总数: {totalSites}</div>
+        <div style={{ color: '#4a86e8' }}>网站: {totalSites}</div>
         <div style={{ color: '#3bd672' }}>正常: {upSites}</div>
         <div style={{ color: '#DE484A' }}>异常: {downSites}</div>
       </div>
