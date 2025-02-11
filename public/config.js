@@ -16,7 +16,7 @@ window.Config = {
   ShowLink: true,
 
   // 背景图片
-  Image: 'https://api.jmjm.tk/api/random/?tag=4K',
+  Image: 'http://cdn-hsyq-static.shanhutech.cn/bizhi/staticwp/202010/e4dd0cec9731c326b148c02b2e9af63a--2556948066.jpg',
 
   // 导航栏菜单
   Navi: [
