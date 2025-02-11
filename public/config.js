@@ -16,7 +16,7 @@ window.Config = {
   ShowLink: true,
 
   // 背景图片
-  Image: 'https://ps.ssl.qhimg.com/t025ab47ccd1f7cc6fc.jpg',
+  Image: 'https://api.jmjm.tk/api/random/?tag=4K',
 
   // 导航栏菜单
   Navi: [
