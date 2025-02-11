@@ -8,7 +8,7 @@ import { MonitorContext } from './app';
 function UptimeRobot({ apikey }) {
   const status = {
     ok: '正常运行',
-    down: '无法访问',
+    down: '访问异常',
     unknow: '未知状态'
   };
 
