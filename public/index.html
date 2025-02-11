@@ -8,72 +8,9 @@
     />
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>Uptime Status</title>
-    <style>
-      .login {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-      }
-      .login form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .login input {
-        margin-bottom: 10px;
-        padding: 5px;
-        font-size: 16px;
-      }
-      .login button {
-        padding: 5px 10px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-      #app {
-        display: none;
-      }
-    </style>
-    <script>
-      async function hashPassword(password) {
-        const msgUint8 = new TextEncoder().encode(password);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
-      }
-
-      async function handleLogin(event) {
-        event.preventDefault();
-        const password = document.getElementById('password').value;
-        const hashedPassword = await hashPassword(password);
-        const correctHashedPassword = '4c38493c30b2d573d3e974349cea8aa83f7457a98add547f612a53723efde1e1'; // 使用哈希后的密码
-
-        if (hashedPassword === correctHashedPassword) {
-          document.getElementById('login').style.display = 'none';
-          document.getElementById('app').style.display = 'block';
-          loadApp(); // 加载应用
-        } else {
-          alert('密码错误');
-        }
-      }
-
-      function loadApp() {
-        const script = document.createElement('script');
-        script.src = './src/index.js'; // 确保加载 React 应用的主脚本
-        document.body.appendChild(script);
-      }
-    </script>
+    <script src="./config.js"></script>
   </head>
   <body>
-    <div id="login" class="login">
-      <h2>请输入密码</h2>
-      <form onsubmit="handleLogin(event)">
-        <input type="password" id="password" placeholder="密码" />
-        <button type="submit">登录</button>
-      </form>
-    </div>
     <div id="app"></div>
   </body>
 </html>
