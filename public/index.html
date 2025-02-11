@@ -48,7 +48,7 @@
         event.preventDefault();
         const password = document.getElementById('password').value;
         const hashedPassword = await hashPassword(password);
-        const correctHashedPassword = 'your_hashed_password'; // 使用哈希后的密码
+        const correctHashedPassword = '4c38493c30b2d573d3e974349cea8aa83f7457a98add547f612a53723efde1e1'; // 使用哈希后的密码
 
         if (hashedPassword === correctHashedPassword) {
           document.getElementById('login').style.display = 'none';
