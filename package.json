@@ -3,14 +3,12 @@
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js",         // 添加这一行
-    "build": "react-scripts build",
-    "start-client": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
-    "express": "^4.17.1",             // 确保你安装了 express
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
