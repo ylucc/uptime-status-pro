@@ -1,6 +1,8 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { formatNumber } from './helper';
+import {
+  formatNumber
+} from './helper';
 
 export async function GetMonitors(apikey, days) {
 
@@ -25,8 +27,18 @@ export async function GetMonitors(apikey, days) {
     custom_uptime_ranges: ranges.join('-'),
   };
 
-  const response = await axios.post('https://api.uptimerobot.com/v2/getMonitors', postdata, { timeout: 10000 });
-  if (response.data.stat !== 'ok') throw response.data.error;
+  const response = await axios.post('https://cors.status.org.cn/uptimerobot/v2/getMonitors', postdata, {
+    timeout: 10000
+  });
+  if (response.data.stat !== 'ok') {
+    document.getElementById('status-text').style.display = 'none';
+    document.getElementById('status-down').style.display = 'block';
+    document.getElementById('status-down').innerHTML = '数据获取出错';
+    document.getElementById('status-time-up').innerHTML = '这可能是暂时性的，刷新页面以重试'
+    document.getElementById('header').style = 'background: rgb(228,126,126); background: linear-gradient(53deg, rgba(228,126,126,1) 0%, rgba(238,85,85,1) 100%);';
+    document.getElementById('status-tip').className = 'status-tip down';
+    throw response.data.error;
+  };
   return response.data.monitors.map((monitor) => {
 
     const ranges = monitor.custom_uptime_ranges.split('-');
@@ -38,7 +50,10 @@ export async function GetMonitors(apikey, days) {
       daily[index] = {
         date: date,
         uptime: formatNumber(ranges[index]),
-        down: { times: 0, duration: 0 },
+        down: {
+          times: 0,
+          duration: 0
+        },
       }
     });
 
@@ -51,7 +66,10 @@ export async function GetMonitors(apikey, days) {
         daily[map[date]].down.times += 1;
       }
       return total;
-    }, { times: 0, duration: 0 });
+    }, {
+      times: 0,
+      duration: 0
+    });
 
     const result = {
       id: monitor.id,
@@ -63,8 +81,31 @@ export async function GetMonitors(apikey, days) {
       status: 'unknow',
     };
 
-    if (monitor.status === 2) result.status = 'ok';
-    if (monitor.status === 9) result.status = 'down';
+
+    var d = new Date();
+    var hour = d.getHours();
+    var minute = d.getMinutes();
+    if (minute >= 0 && minute < 10) {
+      minute = "0" + minute;
+    }
+    document.getElementById('status-last-time').innerHTML = hour + "&nbsp;:&nbsp;" + minute;
+
+    if (monitor.status === 2) {
+      result.status = 'ok';
+      document.getElementById('status-text').innerHTML = "所有站点运行正常";
+    };
+    if (monitor.status === 9) {
+      result.status = 'down';
+      document.getElementById('status-text').style.display = 'none';
+      document.getElementById('status-down').style.display = 'block';
+      document.getElementById('header').style = 'background: rgb(228,126,126); background: linear-gradient(53deg, rgba(228,126,126,1) 0%, rgba(238,85,85,1) 100%);';
+      document.getElementById('status-tip').className = 'status-tip down';
+      var link = document.createElement('link');
+      link.type = 'image/x-icon';
+      link.rel = 'shortcut icon';
+      link.href = '/favicon-down.ico';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    };
     return result;
   });
 }
