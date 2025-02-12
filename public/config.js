@@ -16,7 +16,7 @@ window.Config = {
   ShowLink: true,
 
   // 背景图片
-  Image: 'https://api.jmjm.tk/api/bing/?rand=true',
+  Image: '',
 
   // 导航栏菜单
   Navi: [
