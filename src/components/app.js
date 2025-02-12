@@ -10,7 +10,7 @@ function App() {
   const [totalSites, setTotalSites] = useState(0);
   const [upSites, setUpSites] = useState(0);
   const [downSites, setDownSites] = useState(0);
-  const [unknowSites, setUnknowSites] = useState(0);
+  const [unknownSites, setUnknownSites] = useState(0);
 
   const apikeys = useMemo(() => {
     const { ApiKeys } = window.Config;
@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknowSites, setUnknowSites }}>
+    <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknownSites, setUnknownSites }}>
       <Header />
       <div className='container'>
         <div id='uptime'>
