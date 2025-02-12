@@ -7,16 +7,19 @@ function Header() {
 
 useEffect(() => {
     document.title = window.Config.SiteName;
-    
+
+    var imageUrl = window.Config.Image;
+    var colorCode = window.Config.color;
+
     if (imageUrl) {
       document.body.setAttribute(
         'style',
-        "background: url('" + window.Config.Image + "') no-repeat center center fixed;background-size: cover;"
+        "background: url('" + imageUrl + "') no-repeat center center fixed;background-size: cover;"
       );
     } else {
       document.body.setAttribute(
         'style',
-        "background: " + window.Config.color + ";"
+        "background: " + colorCode + ";"
       );
     }
   }, []);
