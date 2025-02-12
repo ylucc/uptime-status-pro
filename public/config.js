@@ -16,7 +16,7 @@ window.Config = {
   ShowLink: true,
 
   // 背景图片
-  Image: '',
+  Image: 'https://api.jmjm.tk/api/bing/?rand=true',
 
   // 背景颜色
   color: '#555555',
