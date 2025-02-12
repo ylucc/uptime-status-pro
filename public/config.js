@@ -16,7 +16,7 @@ window.Config = {
   ShowLink: true,
 
   // 背景图片
-  Image: '',
+  Image: '#555555',
 
   // 导航栏菜单
   Navi: [
