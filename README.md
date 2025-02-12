@@ -3,6 +3,8 @@
 一个基于 UptimeRobot API 的在线状态面板。
 本版是 https://github.com/yb/uptime-status 的修改美化版本。
 
+演示：[www.xh.sd](https://www.xh.sd/ "www.xh.sd")
+
 <img width="1152" alt="image" src="https://user-images.githubusercontent.com/25887822/178935137-6d23521d-5894-4fb8-922d-3575be4f7abc.png">
 
 ## 事先准备
