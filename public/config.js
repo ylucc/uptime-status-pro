@@ -28,8 +28,8 @@ window.Config = {
       url: 'https://mjmjj.us.kg'
     },
     {
-      text: '监控',
-      url: 'https://stats.uptimerobot.com/KuCPHkw6CJ'
+      text: 'Github',
+      url: 'https://github.com/caogens/uptime-status-pro'
     },
   ],
 };
