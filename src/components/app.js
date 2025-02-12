@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, setUnknowSites }}>
+    <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknowSites, setUnknowSites }}>
       <Header />
       <div className='container'>
         <div id='uptime'>
