@@ -1,7 +1,7 @@
 window.Config = {
 
   // 显示标题
-  SiteName: 'MJMJJ网站监控',
+  SiteName: 'MJJ网站监控',
 
   // UptimeRobot Api Keys
   // 支持 Monitor-Specific 和 Read-Only
@@ -16,7 +16,7 @@ window.Config = {
   ShowLink: true,
 
   // 背景图片
-  Image: 'https://api.jmjm.tk/api/bing/?rand=true',
+  Image: 'https://api.jmjm.tk/api/random/?tag=meinv',
 
   // 背景颜色
   color: '#555555',
@@ -25,7 +25,7 @@ window.Config = {
   Navi: [
     {
       text: '主页',
-      url: 'https://mjmjj.us.kg'
+      url: 'https://www.xh.sd'
     },
     {
       text: 'Github',
