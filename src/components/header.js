@@ -5,12 +5,20 @@ import { MonitorContext } from './app';
 function Header() {
   const { totalSites, upSites, downSites } = useContext(MonitorContext);
 
-  useEffect(() => {
+useEffect(() => {
     document.title = window.Config.SiteName;
-    document.body.setAttribute(
-      'style',
-      "background: url('" + window.Config.Image + "') no-repeat center center fixed;background-size: cover;"
-    );
+    
+    if (imageUrl) {
+      document.body.setAttribute(
+        'style',
+        "background: url('" + imageUrl + "') no-repeat center center fixed;background-size: cover;"
+      );
+    } else {
+      document.body.setAttribute(
+        'style',
+        "background: " + colorCode + ";"
+      );
+    }
   }, []);
 
   return (
