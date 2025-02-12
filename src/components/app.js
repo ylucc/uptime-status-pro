@@ -34,7 +34,7 @@ function App() {
               基于 <Link to='https://uptimerobot.com/' text='UptimeRobot' /> 接口制作，检测频率 5 分钟
             </div>
             <div className='right'>
-              &copy; 2020~2025 <Link to='https://mjmjj.us.kg' text='MJMJJ网站监控' />, Version {Package.version}
+              &copy; 2020~2025 <Link to='https://www.xh.sd' text='MJJ网站监控' />, Version {Package.version}
             </div>
           </div>
         </div>
