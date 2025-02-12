@@ -3,7 +3,7 @@ import Link from './link';
 import { MonitorContext } from './app';
 
 function Header() {
-  const { totalSites, upSites, downSites } = useContext(MonitorContext);
+  const { totalSites, upSites, downSites, unknowSites } = useContext(MonitorContext);
 
 useEffect(() => {
     document.title = window.Config.SiteName;
@@ -38,6 +38,7 @@ useEffect(() => {
         <div style={{ color: '#4a86e8' }}>网站: {totalSites}</div>
         <div style={{ color: '#3bd672' }}>正常: {upSites}</div>
         <div style={{ color: '#DE484A' }}>异常: {downSites}</div>
+        <div style={{ color: '#DE484A' }}>暂停: {unknowSites}</div>
       </div>
     </div>
   );
