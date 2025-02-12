@@ -17,7 +17,7 @@ function UptimeRobot({ apikey }) {
   const [monitors, setMonitors] = useState([]);
   const [sslInfo, setSslInfo] = useState({});
 
-  const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknowSites, setUnknowSites } = useContext(MonitorContext);
+  const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknownSites, setUnknownSites } = useContext(MonitorContext);
 
   useEffect(() => {
     GetMonitors(apikey, CountDays).then((data) => {
@@ -25,11 +25,12 @@ function UptimeRobot({ apikey }) {
 
       let up = data.filter((monitor) => monitor.status === 'ok').length;
       let down = data.filter((monitor) => monitor.status === 'down').length;
+      let unknow = data.filter((monitor) => monitor.status === 'unknow').length;
 
       setTotalSites(prevTotal => prevTotal + data.length);
       setUpSites(prevUp => prevUp + up);
       setDownSites(prevDown => prevDown + down);
-      setUnknowSites(prevUnknow => prevUnknow + unknow);
+      setUnknownSites(prevUnknown => prevUnknown + unknow);
 
       const today = new Date().toISOString().split('T')[0]; // 获取当天日期字符串
 
@@ -65,7 +66,7 @@ function UptimeRobot({ apikey }) {
     }).catch(error => {
       console.error('获取监控信息时出错:', error);
     });
-  }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites, setUnknowSites]);
+  }, [apikey, CountDays, setTotalSites, setUpSites, setDownSites, setUnknownSites]);
 
   if (monitors.length === 0) {
     return (
