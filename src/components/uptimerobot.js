@@ -9,6 +9,9 @@ function UptimeRobot({ apikey }) {
   const status = {
     ok: '正常运行',
     down: '访问异常',
+    stop: '暂停检测',
+    pause: '暂停检测',
+    error: '无法访问',
     unknow: '未知状态'
   };
 
