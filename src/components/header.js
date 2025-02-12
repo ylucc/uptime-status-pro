@@ -3,9 +3,9 @@ import Link from './link';
 import { MonitorContext } from './app';
 
 function Header() {
-  const { totalSites, upSites, downSites, unknowSites } = useContext(MonitorContext);
+  const { totalSites, upSites, downSites, unknownSites } = useContext(MonitorContext);
 
-useEffect(() => {
+  useEffect(() => {
     document.title = window.Config.SiteName;
 
     var imageUrl = window.Config.Image;
@@ -38,7 +38,7 @@ useEffect(() => {
         <div style={{ color: '#4a86e8' }}>网站: {totalSites}</div>
         <div style={{ color: '#3bd672' }}>正常: {upSites}</div>
         <div style={{ color: '#DE484A' }}>异常: {downSites}</div>
-        <div style={{ color: '#DE484A' }}>暂停: {unknowSites}</div>
+        <div style={{ color: '#FF9900' }}>暂停: {unknownSites}</div>
       </div>
     </div>
   );
