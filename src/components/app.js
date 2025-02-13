@@ -25,7 +25,7 @@ function App() {
       <Header />
       <div className='container'>
         <div className='search-container'>
-          <input type="text" className="search-input" placeholder="搜索网站" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+          <input type="text" className="search-input" placeholder="搜索关键字" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           {searchTerm && <button className="clear-button" onClick={() => setSearchTerm('')}>X</button>}
         </div>
         <div id='uptime'>
