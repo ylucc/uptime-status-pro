@@ -17,7 +17,7 @@ function UptimeRobot({ apikey }) {
   const [monitors, setMonitors] = useState([]);
   const [sslInfo, setSslInfo] = useState({});
 
-  const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknownSites, setUnknownSites } = useContext(MonitorContext);
+  const { totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknownSites, setUnknownSites, searchTerm } = useContext(MonitorContext);
 
   useEffect(() => {
     GetMonitors(apikey, CountDays).then((data) => {
@@ -76,7 +76,21 @@ function UptimeRobot({ apikey }) {
     );
   }
 
-  return monitors.map((site) => {
+  const filteredMonitors = monitors.filter((site) => {
+    if (!searchTerm) return true;
+    const regex = new RegExp(searchTerm, 'i');
+    return regex.test(site.name);
+  });
+
+  if (filteredMonitors.length === 0) {
+    return (
+      <div className='site'>
+        <div className='no-results'>没有找到相关网站</div>
+      </div>
+    );
+  }
+
+  return filteredMonitors.map((site) => {
     const url = new URL(site.url);
     const domain = url.hostname;
     const ssl = sslInfo[domain] || {};
