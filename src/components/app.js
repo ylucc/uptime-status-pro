@@ -11,6 +11,7 @@ function App() {
   const [upSites, setUpSites] = useState(0);
   const [downSites, setDownSites] = useState(0);
   const [unknownSites, setUnknownSites] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const apikeys = useMemo(() => {
     const { ApiKeys } = window.Config;
@@ -20,14 +21,19 @@ function App() {
   }, []);
 
   return (
-    <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknownSites, setUnknownSites }}>
+    <MonitorContext.Provider value={{ totalSites, setTotalSites, upSites, setUpSites, downSites, setDownSites, unknownSites, setUnknownSites, searchTerm, setSearchTerm }}>
       <Header />
       <div className='container'>
+        <div className='search-container'>
+          <input type="text" className="search-input" placeholder="搜索网站" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+          {searchTerm && <button className="clear-button" onClick={() => setSearchTerm('')}>X</button>}
+        </div>
         <div id='uptime'>
           {apikeys.map((key) => (
             <UptimeRobot key={key} apikey={key} />
           ))}
         </div>
+      </div>
         <div id="footer">
           <div className='container'>
             <div className='left'>
@@ -38,7 +44,6 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
     </MonitorContext.Provider>
   );
 }
