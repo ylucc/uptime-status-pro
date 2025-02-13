@@ -14,16 +14,20 @@
 
 ## 事先准备
 
-- 您需要先到 [UptimeRobot](https://uptimerobot.com/ "UptimeRobot") 添加站点监控，并在 My Settings 页面获取 API Key（只读的最安全，不要暴露可写权限的 api key 账号到公开仓库）
-- 推荐使用vercel、netlify
+- 您需要先到 [UptimeRobot](https://uptimerobot.com/ "UptimeRobot") 注册账号并添加站点监控。
+- 然后获取API Key，打开：https://dashboard.uptimerobot.com/integrations 在最下面下面找到Main API keys，选择只读密钥Read-only API key，点击后面的+Create，然后复制保存起来。
+[![](https://ps.ssl.qhimg.com/t02a134917a5a897f13.jpg)](https://ps.ssl.qhimg.com/t02a134917a5a897f13.jpg)
 
 ## 如何部署：
 
-- 克隆、fork 本仓库，具体姿势取决于你
+- 推荐使用 vercel 或 netlify 部署。
+- 克隆或Fork本仓库，具体姿势取决于你。
 - 修改 `config.js` 文件：
    - `SiteName`: 要显示的网站名称
-   - `ApiKeys`: 从 UptimeRobot 获取的 API Key（只读即可），Read-Only API Key
+   - `ApiKeys`: 从 UptimeRobot 获取的 API Key（只读即可），Read-Only API Key。
    - `CountDays`: 要显示的日志天数，建议 60 或 90，显示效果比较好
    - `ShowLink`: 是否显示站点链接
+   - `Image`: 背景图片，觉得背景花俏可以留空。
+   - `color`: 背景颜色
    - `Navi`: 导航栏的菜单列表
 - 傻瓜式部署到 vercel.com
