@@ -16,7 +16,7 @@
 
 - 您需要先到 [UptimeRobot](https://uptimerobot.com/) 注册账号并添加站点监控。
 - 然后获取API Key，打开：https://dashboard.uptimerobot.com/integrations 在最下面下面找到Main API keys，选择只读密钥Read-only API key，点击后面的+Create，然后复制保存起来。
-![图片](https://ps.ssl.qhimg.com/t02a134917a5a897f13.jpg)
+![图片](http://fmc-75014.picgzc.qpic.cn/consult_viewer_pic__9817a71f-b309-45fe-9332-489fdb68af46_1739425603131.jpg)
 
 ## 如何部署：
 
