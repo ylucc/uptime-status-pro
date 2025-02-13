@@ -8,9 +8,7 @@
 
 <img width="1224" alt="image" src="http://fmc-75014.picgzc.qpic.cn/consult_viewer_pic__7f1c956f-adc2-40f1-bba4-25ec915f07a5_1739410968077.jpg">
 
-`markdown
-   ![](http://fmc-75014.picgzc.qpic.cn/consult_viewer_pic__7f1c956f-adc2-40f1-bba4-25ec915f07a5_1739410968077.jpg)
-`
+![图片](http://fmc-75014.picgzc.qpic.cn/consult_viewer_pic__7f1c956f-adc2-40f1-bba4-25ec915f07a5_1739410968077.jpg)
 
 美化了页面，添加了背景设置，添加了状态统计，添加了网站SSL证书的检测，添加了搜索功能。
 
@@ -20,7 +18,7 @@
 
 - 您需要先到 [UptimeRobot](https://uptimerobot.com/ "UptimeRobot") 注册账号并添加站点监控。
 - 然后获取API Key，打开：https://dashboard.uptimerobot.com/integrations 在最下面下面找到Main API keys，选择只读密钥Read-only API key，点击后面的+Create，然后复制保存起来。
-![](https://ps.ssl.qhimg.com/t02a134917a5a897f13.jpg)
+![图片](https://ps.ssl.qhimg.com/t02a134917a5a897f13.jpg)
 
 ## 如何部署：
 
