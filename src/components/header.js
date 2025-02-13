@@ -38,7 +38,7 @@ function Header() {
         <div style={{ color: '#4a86e8' }}>网站: {totalSites}</div>
         <div style={{ color: '#3bd672' }}>正常: {upSites}</div>
         <div style={{ color: '#DE484A' }}>异常: {downSites}</div>
-        <div style={{ color: '#FFD700' }}>暂停: {unknownSites}</div>
+        <div style={{ color: '#ffe599' }}>暂停: {unknownSites}</div>
       </div>
     </div>
   );
