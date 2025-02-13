@@ -37,10 +37,10 @@ a {
   background: rgba(18, 26, 38, .5);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  padding: 10px;
+  padding: 30px 0;
   color: $primary-color;
   width: 100%;
-  border-radius: 0 0 30px 30px;
+  border-radius: 10px;
   .container {
     display: flex;
     align-items: center;
