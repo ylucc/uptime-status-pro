@@ -7,6 +7,7 @@
 此版本是 https://github.com/yb/uptime-status 的修改美化版本。
 
 <img width="1224" alt="image" src="http://fmc-75014.picgzc.qpic.cn/consult_viewer_pic__7f1c956f-adc2-40f1-bba4-25ec915f07a5_1739410968077.jpg">
+![](http://fmc-75014.picgzc.qpic.cn/consult_viewer_pic__7f1c956f-adc2-40f1-bba4-25ec915f07a5_1739410968077.jpg)
 
 美化了页面，添加了背景设置，添加了状态统计，添加了网站SSL证书的检测，添加了搜索功能。
 
