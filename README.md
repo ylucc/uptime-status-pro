@@ -1,11 +1,16 @@
 # uptime-status-pro
 
 一个基于 UptimeRobot API 的在线状态面板。
-本版是 https://github.com/yb/uptime-status 的修改美化版本。
+
+## 版本介绍
+
+此版本是 https://github.com/yb/uptime-status 的修改美化版本。
+
+<img width="1152" alt="image" src="https://p0.ssl.qhimgs1.com/t02ca1f2acaf8e93214.jpg">
+
+美化了页面，添加了背景设置，添加了网站SSL证书的检测，添加了搜索功能。
 
 演示：[www.xh.sd](https://www.xh.sd/ "www.xh.sd")
-
-<img width="1152" alt="image" src="https://user-images.githubusercontent.com/25887822/178935137-6d23521d-5894-4fb8-922d-3575be4f7abc.png">
 
 ## 事先准备
 
