@@ -118,7 +118,7 @@ function UptimeRobot({ apikey }) {
               >
                 SSL
               </span>
-              <ReactTooltip id={`tooltip-${site.id}`} place='top' type='dark' effect='solid' />
+              <ReactTooltip id={`tooltip-${site.id}`} place='top' type='dark' effect='solid' className='tooltip' />
             </>
           )}
           <div className='status-container'>
