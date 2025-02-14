@@ -101,22 +101,23 @@ function UptimeRobot({ apikey }) {
           <span className='name' dangerouslySetInnerHTML={{ __html: site.name }} />
           {ShowLink && (
             <>
-              <Link className='link' to={site.url} text={site.name} />
-              &nbsp;&nbsp;
-              {ssl.remaining_days !== undefined ? (
-                <span
-                  className='ssl-info'
-                  data-tip={`到期时间: ${ssl.valid_to}`}
-                  data-for={`tooltip-${site.id}`}
-                  id={`ssl-info-${site.id}`}
-                  onMouseOver={() => ReactTooltip.show(document.getElementById(`ssl-info-${site.id}`))}
-                  onMouseOut={() => ReactTooltip.hide(document.getElementById(`ssl-info-${site.id}`))}
-                >
-                  (证书剩余: {ssl.remaining_days}天)
-                </span>
-              ) : (
-                <span className='ssl-info'>(暂无证书)</span>
-              )}
+              <Link to={site.url} text="Link" className='link' />
+              <span
+                className='ssl-info'
+                data-tip={
+                  ssl.valid_to
+                    ? `到期时间: ${ssl.valid_to}，剩余天数: ${ssl.remaining_days}天`
+                    : '暂无证书'
+                }
+                data-for={`tooltip-${site.id}`}
+                id={`ssl-info-${site.id}`}
+                onClick={() => {
+                  const tooltip = document.getElementById(`ssl-info-${site.id}`);
+                  ReactTooltip.show(tooltip);
+                }}
+              >
+                SSL
+              </span>
               <ReactTooltip id={`tooltip-${site.id}`} place='top' type='dark' effect='solid' />
             </>
           )}
